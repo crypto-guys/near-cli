@@ -60,7 +60,7 @@ function getConfig(env) {
         };
     case 'guildnet':
         return {
-            networkId: 'guildet',
+            networkId: 'guildnet',
             nodeUrl: 'https://rpc.openshards.io',
             contractName: CONTRACT_NAME,
             walletUrl: 'https://wallet.openshards.io',
