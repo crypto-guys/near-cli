@@ -67,6 +67,16 @@ function getConfig(env) {
             contractName: CONTRACT_NAME,
             masterAccount: 'test.near',
         };
+    case 'guildnet':
+        return {
+            networkId: 'guildet',
+            nodeUrl: 'https://rpc.openshards.io',
+            contractName: CONTRACT_NAME,
+            walletUrl: 'https://wallet.guildnet.near.org',
+            helperUrl: 'https://helper.guildnet.near.org',
+            helperAccount: 'guildnet',
+            explorerUrl: 'https://explorer.guildnet.near.org',
+        };
     default:
         throw Error(`Unconfigured environment '${env}'. Can be configured in src/config.js.`);
     }
