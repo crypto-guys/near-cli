@@ -7,7 +7,7 @@ const util = require('util');
 const checkForAccDoesNotExist = (error, options) => {
     if(!String(error).includes('does not exist while viewing')) return false;
 
-    const suffixesToNetworks = {near:'mainnet', testnet:'testnet', betanet:'betanet'};
+    const suffixesToNetworks = {near:'mainnet', testnet:'testnet', betanet:'betanet', guildnet:'guildnet'};
 
     const currentNetwork = config.helperAccount;
     console.log(chalk`\n{bold.red Account {bold.white ${options.accountId}} is not found in {bold.white ${suffixesToNetworks[currentNetwork]}}\n}`);
