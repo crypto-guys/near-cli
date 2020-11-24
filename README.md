@@ -10,7 +10,10 @@ NEAR CLI is a Node.js application that relies on [`near-api-js`](https://github.
 ## Installation
 
 ```bash
-npm install -g near-cli
+curl -sL https://deb.nodesource.com/setup_15.x | sudo -E bash -
+sudo apt-get install -y nodejs
+cd $HOME && git clone https://github.com/crypto-guys/near-cli.git
+sudo npm install -g ~/near-cli
 ```
 
 ## Usage
@@ -20,6 +23,9 @@ In command line, from the directory with your project:
 ```bash
 near <command>
 ```
+#### Keys
+
+Existing keys should be placed in ~/.near-credentials/guildnet 
 
 ### Commands
 
@@ -103,9 +109,11 @@ near repl --acountId bob
 
 #### Environments
 
-Use `NEAR_ENV` to define which network these commands will target. Default is `testnet`.
+Use `NEAR_ENV` to define which network these commands will target. Default is `testnet`. 
+
+Options available = `testnet, guildnet, mainnet, betanet`
 ```
-export NEAR_ENV=mainnet
+export NEAR_ENV=guildnet
 ```
 
 ## License
