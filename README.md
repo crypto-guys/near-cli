@@ -7,11 +7,53 @@ NEAR CLI is a Node.js application that relies on [`near-api-js`](https://github.
 
 > note that **Node.js version 10+** is required to run NEAR CLI
 
+## Removing previous installations
+
+- We want to remove all previous installations of nodejs, npm, nvm, and near-cli 
+- I was using nvm and npm and nodejs and had to remove everything first. Im not 100% sure which of these will work for you but generally ```sudo npm remove near-cli``` works well when I use it. However its possible one of these commands would be more helpful depending on how you installed.
+- The most important thing is all 4 of these packages are removed from the system how it is done is not so important.
+```
+npm remove near-cli
+npm remove -u near-cli
+sudo npm remove near-cli
+sudo npm remove -g near-cli
+sudo npm remove -u near-cli
+sudo apt purge npm nodejs --autoremove
+```
+
+- Edit .bashrc to remove any lines for nvm/npm... there should be 3 lines
+```
+nano ~/.bashrc
+```
+- When finished with the edit save the file then
+```
+source ~/.bashrc
+```
+
+- remove nvm and npm folders
+```
+sudo rm -rf ~/.nvm
+sudo rm -rf ~/.npm
+sudo rm -rf ~/.node_modules
+```
+
+- Test to make sure everything is removed none should report a version number
+```
+near --version && node -v && npm -v && nvm -v 
+```
+
+- I suggest restarting the machine at this point or at the very least your shell
+
+
 ## Installation
 
-```bash
+- Install nodejs 15.x from the nodesource repo and manage it with apt
+```
 curl -sL https://deb.nodesource.com/setup_15.x | sudo -E bash -
-sudo apt-get install -y nodejs
+sudo apt install build-essential nodejs --install-suggests
+```
+- Install near-cli from this repo
+```
 cd $HOME && git clone https://github.com/crypto-guys/near-cli.git
 sudo npm install -g ~/near-cli
 ```
@@ -19,6 +61,10 @@ sudo npm install -g ~/near-cli
 ## Usage
 
 In command line, from the directory with your project:
+
+- To select your preferred network use
+
+```export NEAR_ENV=guildnet```
 
 ```bash
 near <command>
