@@ -7,6 +7,17 @@ NEAR CLI is a Node.js application that relies on [`near-api-js`](https://github.
 
 > note that **Node.js version 10+** is required to run NEAR CLI
 
+## Installation
+
+- Assuming you already have near-cli installed using npm you might be able to reinstall it with this method
+```
+sudo npm remove near-cli
+cd $HOME && git clone https://github.com/crypto-guys/near-cli.git
+sudo npm install -g ~/near-cli
+```
+
+If this method fail it is suggested to remove everything related to nodejs and its package managers to start fresh.
+
 ## Removing previous installations
 
 - We want to remove all previous installations of nodejs, npm, nvm, and near-cli 
@@ -37,23 +48,15 @@ sudo rm -rf ~/.npm
 sudo rm -rf ~/.node_modules
 ```
 
-- Test to make sure everything is removed none should report a version number
+- Test to make sure everything is removed nothing should report a version number
 ```
 near --version && node -v && npm -v && nvm -v 
 ```
 
-- I suggest restarting the machine at this point or at the very least your shell
-
-
-## Installation
-
-- Install nodejs 15.x from the nodesource repo and manage it with apt
+- I suggest restarting the machine at this point or at the very least your shell then after the restart
 ```
 curl -sL https://deb.nodesource.com/setup_15.x | sudo -E bash -
 sudo apt install build-essential nodejs --install-suggests
-```
-- Install near-cli from this repo
-```
 cd $HOME && git clone https://github.com/crypto-guys/near-cli.git
 sudo npm install -g ~/near-cli
 ```
