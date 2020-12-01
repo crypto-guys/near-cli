@@ -9,57 +9,17 @@ NEAR CLI is a Node.js application that relies on [`near-api-js`](https://github.
 
 ## Installation
 
-- Assuming you already have near-cli installed using npm you might be able to reinstall it with this method
-```
-sudo npm remove near-cli
-cd $HOME && git clone https://github.com/crypto-guys/near-cli.git
-sudo npm install -g ~/near-cli
-```
-
-If this method fail it is suggested to remove everything related to nodejs and its package managers to start fresh. Please see the next section on removing old installations. If near is working move on to Usage...
-
-## Removing previous installations
-
-- We want to remove all previous installations of nodejs, npm, nvm, and near-cli 
-- I was using nvm and npm and nodejs and had to remove everything first. Im not 100% sure which of these will work for you but generally ```sudo npm remove near-cli``` works well when I use it. However its possible one of these commands would be more helpful depending on how you installed.
-- The most important thing is all 4 of these packages are removed from the system how it is done is not so important.
-```
-npm remove near-cli
-npm remove -u near-cli
-sudo npm remove near-cli
-sudo npm remove -g near-cli
-sudo npm remove -u near-cli
-sudo apt purge npm nodejs --autoremove
-```
-
-- Edit .bashrc to remove any lines for nvm/npm... there should be 3 lines
-```
-nano ~/.bashrc
-```
-- When finished with the edit save the file then
-```
-source ~/.bashrc
-```
-
-- remove nvm and npm folders
-```
-sudo rm -rf ~/.nvm
-sudo rm -rf ~/.npm
-sudo rm -rf ~/.node_modules
-```
-
-- Test to make sure everything is removed nothing should report a version number
-```
-near --version && node -v && npm -v && nvm -v 
-```
-
-- I suggest restarting the machine at this point or at the very least your shell then after the restart
+### New Install
 ```
 curl -sL https://deb.nodesource.com/setup_15.x | sudo -E bash -
 sudo apt install build-essential nodejs --install-suggests
-cd $HOME && git clone https://github.com/crypto-guys/near-cli.git
-sudo npm install -g ~/near-cli
+cd $HOME && git clone https://github.com/crypto-guys/near-cli.git 
+cd near-cli/
+npm install 
+sudo npm install -g
 ```
+
+If this method fail it is suggested to remove everything related to nodejs and its package managers to start fresh. 
 
 ## Usage
 
