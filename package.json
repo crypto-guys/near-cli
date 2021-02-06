@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/crypto-guys/near-cli.git"
+    "url": "git+https://github.com/crypto-guys/guildnet-cli-update"
   },
   "author": "Jane Degtiareva",
   "license": "(MIT AND Apache-2.0)",
   "bugs": {
-    "url": "https://github.com/near/near-cli/issues"
+    "url": "https://github.com/crypto-guys/guildnet-cli-update/issues"
   },
-  "homepage": "https://github.com/near/near-cli#readme",
+  "homepage": "https://github.com/crypto-guys/guildnet-cli-update/near-cli#readme",
   "bin": {
     "near": "./bin/near"
   },
