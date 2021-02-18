@@ -2,7 +2,6 @@
 const exitOnError = require('../utils/exit-on-error');
 const connect = require('../utils/connect');
 const { KeyPair } = require('near-api-js');
-const eventtracking = require('../utils/eventtracking');
 const inspectResponse = require('../utils/inspect-response');
 // Top-level account (TLA) is testnet for foo.alice.testnet
 const TLA_MIN_LENGTH = 32;
@@ -112,18 +111,6 @@ async function createAccount(options) {
         keyPair = await KeyPair.fromRandom('ed25519');
         publicKey = keyPair.getPublicKey();
     }
-    if (keyPair) {
-        // keyFilePath = near.connection.signer.keyStore.getKeyFilePath(options.networkId, options.accountId);
-
-        if (near.connection.signer.keyStore.keyStores.length) {
-            keyRootPath = near.connection.signer.keyStore.keyStores[0].keyDir;
-        }
-        keyFilePath = `${keyRootPath}/${options.networkId}/${options.accountId}.json`;
-        await near.connection.signer.keyStore.setKey(options.networkId, options.accountId, keyPair);
-        await eventtracking.track(eventtracking.EVENT_ID_CREATE_ACCOUNT_END, { success: true, new_keypair: true }, options);
-    } else {
-        await eventtracking.track(eventtracking.EVENT_ID_CREATE_ACCOUNT_END, { success: true, new_keypair: false }, options);
-    }
     // Check to see if account already exists
     try {
         // This is expected to error because the account shouldn't exist
@@ -133,6 +120,13 @@ async function createAccount(options) {
         if (!e.message.includes('does not exist while viewing')) {
             throw e;
         }
+    }
+    if (keyPair) {
+        if (near.connection.signer.keyStore.keyStores.length) {
+            keyRootPath = near.connection.signer.keyStore.keyStores[0].keyDir;
+        }
+        keyFilePath = `${keyRootPath}/${options.networkId}/${options.accountId}.json`;
+        await near.connection.signer.keyStore.setKey(options.networkId, options.accountId, keyPair);
     }
     // Create account
     console.log(`Saving key to '${keyFilePath}'`);

@@ -8,38 +8,34 @@ NEAR CLI is a Node.js application that relies on [`near-api-js`](https://github.
 > note that **Node.js version 10+** is required to run NEAR CLI
 
 ## Installation
-Before you proceed, make sure you have to following software installed :
+
+### New Install
 ```
-sudo apt install python3 git curl
-sudo apt install clang
-sudo apt install build-essential
-sudo apt install nodejs
-sudo apt install npm
-sudo npm install -g n
-sudo n stable
-PATH="$PATH"
+curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+sudo apt install build-essential nodejs --install-suggests
+cd $HOME && git clone https://github.com/crypto-guys/near-cli.git 
+cd near-cli/
+npm install 
+sudo npm install -g
 ```
-### Uninstall near-cli
-```bash
-# sudo may be needed.
-npm uninstall -g near-cli
-```
-### Install near-cli
-```bash
-git clone https://github.com/near-guildnet/near-cli.git
-cd near-cli
-# sudo may be needed.
-npm install -g
-```
+
+If this method fail it is suggested to remove everything related to nodejs and its package managers to start fresh. 
 
 ## Usage
 
 In command line, from the directory with your project:
 
+- To select your preferred network use
+
+```export NEAR_ENV=guildnet```
+
 ```bash
 export NODE_ENV=guildnet|testnet|mainnet|betanet
 near <command>
 ```
+#### Keys
+
+Existing keys should be placed in ~/.near-credentials/guildnet 
 
 ## Account creation
 Without a wallet this is how I created master accounts. Maybe there's a different way. Account creation requires [httpie](https://httpie.org/docs#installation)
@@ -50,25 +46,34 @@ http post http://164.90.144.140:3000/account newAccountId=account_id.guildnet ne
 
 ### Commands
 
+For a list of up-to-date commands, run `near` in your terminal with no arguments. If you need to find a command that isn't listed here, look in the `/commands` folder.  And add it here :)
+
 #### For account:
 ```bash
   near login                                       # logging in through NEAR protocol wallet
   near create-account <accountId>                  # create a developer account with --masterAccount (required), publicKey and initialBalance
   near state <accountId>                           # view account state
   near keys <accountId>                            # view account public keys
+  near add-key <accountId> <accessKey>             # Add an access key to given account
   near send <sender> <receiver> <amount>           # send tokens to given receiver
   near stake <accountId> <stakingKey> <amount>     # create staking transaction (stakingKey is base58 encoded)
   near delete <accountId> <beneficiaryId>          # delete an account and transfer funds to beneficiary account
   near delete-key [accessKey]                      # delete access key
 ```
 
-#### For smart contract:
+#### For native smart contracts:
 ```bash
   near deploy [accountId] [wasmFile] [initFunction] [initArgs] [initGas] [initDeposit]  # deploy your smart contract
   near dev-deploy [wasmFile]                       # deploy your smart contract using temporary account (TestNet only)
   near call <contractName> <methodName> [args]     # schedule smart contract call which can modify state
   near view <contractName> <methodName> [args]     # make smart contract call which can view state
   near clean                                       # clean the smart contract build locally (remove ./out )
+```
+
+#### For NEAR EVM smart contracts:
+```bash
+  near evm-view <evmAccount> <contractName> <methodName> [args]     # make an EVM smart contract call which can view state
+  near evm-call <evmAccount> <contractName> <methodName> [args]     # schedule an EVM smart contract call which can modify state
 ```
 
 #### For transactions:
@@ -110,7 +115,7 @@ near repl --acountId bob
 | --------------------------|:----------------------------------------------| :---------|:----------------------|
 | --help                    | Show help                                     | [boolean] |                       |
 | --version                 | Show version number                           | [boolean] |                       |
-| --nodeUrl                 | NEAR node URL                                 | [string]  |"http://localhost:3030"|
+| --nodeUrl                 | NEAR node URL                                 | [string]  |"https://rpc.testnet.near.org"|
 | --networkId               | NEAR network ID for different keys by network | [string]  |"default"              |
 | --helperUrl               | NEAR contract helper URL                      | [string]  |                       |
 | --keyPath                 | Path to master account key                    | [string]  |                       |
@@ -118,6 +123,15 @@ near repl --acountId bob
 | --masterAccount           | Account used to create requested account.     | [string]  [required]|             |
 | --publicKey               | Public key to initialize the account with     | [string]  [required]|             |
 | --initialBalance          | Number of tokens to transfer to newly account | [string]  [required]|             |
+
+#### Environments
+
+Use `NEAR_ENV` to define which network these commands will target. Default is `testnet`. 
+
+Options available = `testnet, guildnet, mainnet, betanet`
+```
+export NEAR_ENV=guildnet
+```
 
 ## License
 This repository is distributed under the terms of both the MIT license and the Apache License (Version 2.0).
