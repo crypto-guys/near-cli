@@ -20,7 +20,6 @@ module.exports = {
             // TODO: check if implicit account exist, and if the key doen't match already.
             return;
         }
-<<<<<<< HEAD
         const publicKey = await options.signer.getPublicKey();
         // NOTE: Command above already prints public key.
         console.log(`Implicit account: ${implicitAccountId(publicKey.toString())}`);
@@ -28,8 +27,7 @@ module.exports = {
         // TODO: check if implicit account exist, and if the key doen't match already.
         return;
     }
-
-<<<<<<< HEAD
+                         
         // If key doesn't exist, create one and store in the keyStore.
         // Otherwise, it's expected that both key and accountId are already provided in arguments.
         if (!argv.publicKey) {
@@ -45,7 +43,7 @@ module.exports = {
         console.log(`Key pair with ${argv.publicKey} public key for an account "${argv.accountId}"`);
     })
 };
-=======
+
     const { deps: { keyStore } } = near.config;
     const existingKey = await keyStore.getKey(options.networkId, options.accountId);
     if (existingKey) {
@@ -65,8 +63,6 @@ module.exports = {
     console.log(`Key pair with ${options.publicKey} public key for an account "${options.accountId}"`);
     
 }
->>>>>>> asking with more commands
-=======
 
         const { deps: { keyStore } } = near.config;
         const existingKey = await keyStore.getKey(argv.networkId, argv.accountId);
@@ -90,4 +86,4 @@ module.exports = {
         console.log(`Key pair with ${argv.publicKey} public key for an account "${argv.accountId}"`);
     })
 };
->>>>>>> fix as comments
+
