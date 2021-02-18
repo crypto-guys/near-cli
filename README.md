@@ -12,10 +12,9 @@ NEAR CLI is a Node.js application that relies on [`near-api-js`](https://github.
 ### New Install
 ```
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-sudo apt install build-essential nodejs --install-suggests
+sudo apt install build-essential nodejs debian-keyring 
 cd $HOME && git clone https://github.com/crypto-guys/near-cli.git 
 cd near-cli/
-npm install 
 sudo npm install -g
 ```
 
@@ -25,12 +24,13 @@ If this method fail it is suggested to remove everything related to nodejs and i
 
 In command line, from the directory with your project:
 
-- To select your preferred network use
+- To select your preferred network for this session only use
 
 ```export NEAR_ENV=guildnet```
-
+- To save your preferred network for the next login 
 ```bash
-export NODE_ENV=guildnet|testnet|mainnet|betanet
+echo "export NODE_ENV=guildnet" >> ~/.profile
+source .profile
 near <command>
 ```
 #### Keys
